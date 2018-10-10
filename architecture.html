@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="style.css">
+ <div id="content">
+  	<div id="heading">ARCHITECTURE</div>
+    <div id="topic-heading">ARCHITECTURE: </div>
+    <div id="spacing">
+    <b>1. Explain SQL Architecture</b>
+	<b>A:</b>SQL server is a collection of 4 servers. <br>
+Database Server (),<br>
+Integration Server (ETL Process, to implement import and export activities),<br>
+Analysis Server (to build data warehouse),<br>
+Reporting Server (It is interface used to present data or info)<br>
+A Basic select Statement Life Cycle Summary<br>
+	
+    <center><img src="images/sql architecture.jpg"></center>
+
+<br><br>
+Figure 1-5 shows the whole life cycle of a SELECT query, described here:
+<p>
+<b>1.</b> The SQL Server Network Interface (SNI) on the client established a connection to the SNI on the SQL Server using a network protocol such as TCP/IP. It then created a connection to a TDS endpoint over the TCP/IP connection and sent the SELECT statement to SQL Server as a TDS message.</p>
+<p>
+<b>2.</b> The SNI on the SQL Server unpacked the TDS message, read the SELECT statement, and passed a “SQL Command” to the Command Parser.</p>
+<p>
+<b>3. </b>The Command Parser checked the plan cache in the buffer pool for an existing, usable query plan. When it didn’t fi nd one, it created a query tree based on the SELECT statement and passed it to the Optimizer to generate a query plan.</p>
+<p>
+<b>4. </b>The Optimizer generated a “zero cost” or “trivial” plan in the pre-optimization phase because the 
+statement was so simple. The query plan created was then passed to the Query Executor for execution.</p>
+<p>
+<b>5.</b> At execution time, the Query Executor determined that data needed to be read to complete the query plan so it passed the request to the Access Methods in the Storage Engine via an OLE DB interface.</p>
+<p>
+<B>6.</B> The Access Methods needed to read a page from the database to complete the request from the Query Executor and asked the Buffer Manager to provision the data page.</p>
+<p>
+<b>7.</b> The Buffer Manager checked the data cache to see if it already had the page in cache. It wasn’t in cache so it pulled the page from disk, put it in cache, and passed it back to the Access Methods.</p>
+<p>
+<b>8.</b> Finally, the Access Methods passed the result set back to the Relational Engine to send to the client.</p>
+	
+ <br><br>   
+   <b> 2. Tell me something SQL OS?</b><br>
+<b>A:</b><br><Br>
+
+To establish connection between Windows and SQL
+<br>
+<br>
+<b>3. What is the difference between 32-bit and 64-bit versions of Windows?</b>
+<p>The terms 32-bit and 64-bit refer to the way a computer's processor (also called a CPU), handles information. The 64-bit version of Windows handles large amounts of random access memory (RAM) more effectively than a 32-bit system.</p>
+
+<br>
+<br>
+<b>3.  What is the difference between 64 bit and 32 Bit SQL server 2008?</b>
+
+<p>Mainly it starts on a hardware level by the way the CPU) handles information. For example, a 32 bit CPU can only handle 2^32 bit, which limits it to 2 GB of RAM. The 64-bit can handle 2^64, which is a very large amounts of memory. You can easily conclude that any hardware improvement will positively affect every software that runs over it and SQL Server is no exception.</p>
+<br>
+<br>
+<b>4. What is difference between 32bit and 64 bit</b><br>
+<b>A:</b><br>
+<p>It is the amount of memory that 2008 can use. In a 32-bit version it's limited to only a few gigabytes where the 64bit version can use much much more. In the 32 bit version, the server has to access the hardrive for database information much much more, the 64-bit OS and enough memory allows the server to hold much more of the database in memory, making the queries faster.</p>
+
+<p>Mainly it starts on a hardware level by the way the CPU) handles information. For example, a 32 bit CPU can only handle 2^32 bist, which limits it to 2Gb of RAM. The 64-bit can handle 2^64, which is a very large amounts of memory. You can easily conclude that any hardware improvement will positively affect every software that runs over it and SQL Server is no exception.</p>
+
+<p>Main difference I see in a practical sense is memory caps. 32 bit is limited to the old 2 GB threshhold without AWE and you have to use AWE (which to me is like loading device drivers high) to access physical memory greater than the OS limit. Whereas in 64bit SQL, you can pretty much add memory in the current environment limitlessly (they aren't making Windows servers that can hit the 64 bit max for memory) and SQL will use it natively.</p>
+
+<br>
+<br>
+<b>5. What is AWE?</b><br>
+<b>A:</b><br>
+<p>it can be found at SQL Server Level properties. AWE is properly explained in BOL so we will just have our simple explanation. </p>
+<center><img src="images/awe.jpg"></center>
+<p>Address Windowing Extensions API is commonly known as AWE.  AWE is used by SQL Server when it has to support very large amounts of physical memory. AWE feature is only available in SQL Server Enterprise, Standard, and Developer editions with of SQL Server 32 bit version.</p>
+
+<p>Microsoft Windows 2000/2003 server supports maximum of 64GB memory. If we have installed SQL Server 32 bit version which can support maximum of 3 GB memory on Windows 2000/2003, we can enable AWE feature to use available physical memory of server to improve performance of SQL Server. In simple words, AWE provides memory management functions which lets windows to allow more than 3GB memory to standard 32 bit application.</p>    
+    </div>   
+<div id="content-footer">Posted 2nd March 2016 by <a href="#">Sathish Chandra</a></div>
+  </div>
+<div id="page-gap"></div>
+

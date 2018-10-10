@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="style.css">
+ <div id="content">
+  	<div id="heading">COLLATION</div>
+    
+    <div id="spacing">
+
+<p class="red_color">1 What is Collation in SQL Server ? </p>
+<p>
+1. A collation specifies the bit representation of each character in a data set. <br>
+2. Collation is also determine the rules that sort and compare the data.<br>
+3. SQL Server supports storing objects that have different collations in a single database.<br>
+4. For non-Unicode columns, the collation setting specifies the code page for the data and which characters can be represented.<br>
+6. Data that is moved between non-Unicode columns must be converted from the source code page to the destination code page.<br>
+</p>
+<p>
+The result of T-SQL statement can vary when the statement is run in the context of different databases that have different collation settings. If it is possible, to use a standardized collation for your organization.
+This way, you do not have to explicitly specify the collation in every character or Unicode expression. If you must work with objects that have different collation and code page settings, code your queries to consider the rules of collation precedence.
+</p>
+<br>
+<p class="red_color">
+2. What are the options associated with collation in SQL Server ?</p>
+The options associated with a collation are :	<br>
+1. Case Sensitivity.<br>
+2. Accent Sensitivity.<br>
+3. Kana-Sensitivity.<br>
+4 Width Sensitivity.<br>
+
+<p>These options are specified by appending them to the collation name.</p>
+
+<p>For example, this collation Japanese_Bushu_Kakusu_100_CS_AS_KS_WS is case-sensitive, accent-sensitive, Kana-sensitive, and width-sensitive.</p>
+
+<p><b>1. Case-sensitive (_CS) :</b> Distinguishes between uppercase and lowercase letters. If selected, lowercase letters sort ahead of their uppercase versions. If this option is not selected, the collation will be case-insensitive. That is, SQL Server considers the uppercase and lowercase versions of letters to be identical for sorting purposes. You can explicitly select case insensitivity by specifying _CI.</p>
+
+<p><b>2. Accent-sensitive (_AS) :</b> Distinguishes between accented and unaccented characters. For example, 'a' is not equal to 'ấ'. If this option is not selected, the collation will be accent-insensitive. That is, SQL Server considers the accented and unaccented versions of letters to be identical for sorting purposes. You can explicitly select accent insensitivity by specifying _AI.</p>
+
+<p><b>3. Kana-sensitive (_KS) : </b>Distinguishes between the two types of Japanese kana characters: Hiragana and Katakana.If this option is not selected, the collation is Kana-insensitive. That is, SQL Server considers Hiragana and Katakana characters to be equal for sorting purposes. Omitting this option is the only method of specifying Kana-insensitivity.</p>
+
+<p><b>4. Width-sensitive (_WS) : </b>Distinguishes between a single-byte character and the same character when represented as a double-byte character. If this option is not selected, SQL Server considers the single-byte and double-byte representation of the same character to be identical for sorting purposes. Omitting this option is the only method of specifying width-insensitivity.</p>
+<p class="red_color">
+3. What are the supported level of Collation in SQL Server ?</p>
+Setting collations are supported at the following levels of an instance of SQL Server:
+
+<p><b>Server-level collations :</b></p>
+<p>The default server collation is set during SQL Server setup, and also becomes the default collation of the system databases and all user databases. Note that Unicode-only collations cannot be selected during SQL Server setup because they are not supported as server-level collations.</p>
+<p>
+After a collation has been assigned to the server, you cannot change the collation except by exporting all database objects and data, rebuilding the master database, and importing all database objects and data. Instead of changing the default collation of an instance of SQL Server, you can specify the desired collation at the time that you create a new database or database column.
+</p>
+<p><b>
+Database-level collations :</b></p>
+
+<p>When a database is created or modified, you can use the COLLATE clause of the CREATE DATABASE or ALTER DATABASE statement to specify the default database collation. If no collation is specified, the database is assigned the server collation.</p>
+<p>You cannot change the collation of system databases except by changing the collation for the server.</p>
+<p>
+The database collation is used for all metadata in the database, and is the default for all string columns, temporary objects, variable names, and any other strings used in the database. When you change the collation of a user database, know that there is the potential for collation conflicts when queries in the database access temporary tables. Temporary tables are always stored in the tempdb system database, which will use the collation for the instance. Queries that compare character data between the user database and tempdb may fail if the collations cause a conflict in evaluating the character data. You can resolve this by specifying the COLLATE clause in the query.
+</p>
+
+<p><b>Column-level collations :</b></p>
+<p>When you create or alter a table, you can specify collations for each character-string column by using the COLLATE clause. If no collation is specified, the column is assigned the default collation of the database.</p>
+
+<p><b>Expression-level collations :</b></p>
+<p>Expression-level collations are set when a statement is run, and they affect the way a result set is returned. This enables ORDER BY sort results to be locale-specific. Use a COLLATE clause such as the following to implement expression-level collations:</p>
+<p class="red_color">
+4. What are the collation rules in SQL Server ?</p>
+<p>The collation label of a simple expression that references only one character string object is the collation label of the referenced object.
+</p>
+<p>
+The collation label of a complex expression that references two operand expressions with the same collation label is the collation label of the operand expressions.
+</p>
+<p>
+The collation label of the final result of a complex expression that references two operand expressions with different collations is based on the following rules:
+</p>
+<p>
+1.Explicit takes precedence over implicit. Implicit takes precedence over Coercible-default:
+<Br>Explicit > Implicit > Coercible-default
+</p>
+<p>
+2.Combining two Explicit expressions that have been assigned different collations generates an error:
+<br>Explicit X + Explicit Y = Error
+</p>
+<p>
+3.Combining two Implicit expressions that have different collations yields a result of No-collation:
+<Br>Implicit X + Implicit Y = No-collation
+</p>
+<p>
+4.Combining an expression with No-collation with an expression of any label, except Explicit collation (see the following rule), yields a result that has the No-collation label:
+<br>No-collation + anything = No-collation
+</p>
+<p>
+5.Combining an expression with No-collation with an expression that has an Explicit collation, yields an expression with an Explicit label:
+<Br>No-collation + Explicit X = Explicit
+</p>
+
+<p><b>5 what is collation in sql server?</b></p>
+A The physical storage of character strings in SQL Server is controlled by collations. A collation specifies the bit patterns that represent each character and the rules by which characters are sorted and compared.
+
+<p><B>6. How to rename SQL Server?</B></p>
+<label class="blue_color">sp_dropserver</label><br>
+<label class="blue_color">GO</label><Br>
+<label class="blue_color">sp_addserver , local</label><br>
+<label class="blue_color">GO</label><br>
+Remote Logins - If the computer has any remote logins, running sp_dropserver might generate an error similar to the following:
+
+<p class="red_color">Server: Msg 15190, Level 16, State 1, Procedure sp_dropserver, Line 44
+<br>There are still remote logins for the server 'SERVER1'.</p>
+
+To resolve the error, you must drop remote logins for this server.<br>
+To drop remote logins<br>
+·         For a default instance, run the following procedure:<br><br>
+
+<label class="blue_color">sp_dropremotelogin old_name</label><Br>
+<label class="blue_color">GO</label><br>
+·         For a named instance, run the following procedure:<br><Br>
+
+<label class="blue_color">sp_dropremotelogin 'old_name\instancename'</label><br><BR>
+
+<label class="blue_color">GO</label><br>
+    </div>   
+  </div>
+<div id="page-gap"></div>
+

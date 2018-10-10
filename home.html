@@ -1,0 +1,184 @@
+<link rel="stylesheet" href="style.css">
+ <div id="content">
+  	<div id="heading">scripts</div>
+    <div id="topic-heading">Useful SQL DBA Scripts </div>
+    <div id="spacing">
+    <ul>
+    	<li> <a href="#">Information such as Hostname, Current instance name, Edition, Server type, ServicePack andversion number.</a></li>
+        <li> <a href="#">To get the database names, compatibility level, recovery model and their current status.</a></li>
+<li> <a href="#">logical name and the physical location of thedata/log files of all the databases.</a></li>
+<li> <a href="#">To get the lists all of the databases in theserver with the last day the backup happened.</a></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+    </ul>
+    </div>
+    <div id="content-footer">Posted 2nd March 2016 by <a href="#">Sathish Chandra</a></div>
+  </div>
+<div id="page-gap"></div>
+
+<div id="content">
+  	<div id="heading">Trace Flags</div>
+    <div id="topic-heading">SQL Server Trace Flags </div>
+    <table>
+    <tr>
+    	<td> <b>flag</b> </td>
+    	<td><b>Trace Flag Description</b> (underlined are sp_configure’able)</td>
+    </tr>
+    <tr>
+    	<td>-1</td>
+		<td>Sets trace flags for all connections. Used only with DBCC TRACEON and TRACEOFF. The setting of the Trace flag -1 is not visible with DBCC TRACESTATUS command, but work without problems.</td>
+    </tr>
+    <Tr>
+    	<td>105</td>
+    	<td>SQL Server 6.5 you can use maximum 16 tables or subqueries in a single select statement. There is no documented way, to avoid this restriction, but you can use undocumented trace flag 105 for this purpose.</td>
+    </Tr>
+    <tr>
+    	<td>106</td>
+    	<td>Disables line number information for syntax errors.</td>
+    </tr>
+    <tr>
+    	<td>107</td>
+    	<td>Interprets numbers with a decimal point as float instead of decimal.</td>
+    </tr>
+    <tr>
+   	 <td>110</td>
+   	 <td>Turns off ANSI select characteristics.</td>
+    </tr>
+    <tr>
+    	<td>204</td>
+    	<td>A backward compatibility switch that enables non-ansi standard behavior. E.g. previously SQL server ignored trailing blanks in the like statement and allowed queries that contained aggregated functions to have items in the group by clause that were not in the select list.</td>
+    </tr>
+    <tr>
+    	<td>205</td>
+    	<td>Report when a statistics-dependent stored procedure is being recompiled as a result of AutoStat.</td>
+    </tr>
+    <tr>
+    	<td>206</td>
+    	<td>Provides backward compatibility for the setuser statement.</td>
+    </tr>
+    <tr>
+    	<Td>208</Td>
+    	<td>SET QUOTED IDENTIFIER ON.</td>
+    </tr>
+    <Tr>
+    	<td>237</td>
+    	<td>Tells SQL Server to use correlated sub-queries in Non-ANSI standard backward compatibility mode.</td>
+    </Tr>
+    <tr>
+    	<td>242</td>
+    	<td>Provides backward compatibility for correlated subqueries where non-ANSI-standard results are desired.</td>
+    </tr>
+    <tr>
+    	<td>243</td>
+    	<td>The behavior of SQL Server is now more consistent because null ability checks are made at run time and a null ability violation results in the command terminating and the batch or transaction process continuing.</td>
+    </tr>
+    <Tr>
+    	<td>244</td>
+    	<td>Disables checking for allowed interim constraint violations. By default, SQL Server checks for and allows interim constraint violations. An interim constraint violation is caused by a change that removes the violation such that the constraint is met, all within a single statement and transaction. SQL Server checks for interim constraint violations for self-referencing DELETE statements, INSERT, and multi-row UPDATE statements. This checking requires more work tables. With this trace flag you can disallow interim constraint violations, thus requiring fewer work tables.</td>
+    </Tr>
+    <tr>
+    	<td>246</td>
+    	<td>Derived or NULL columns must be explicitly named in a select….INTO or create view statement when not done they raise an error. This flag avoids that.</td>
+    </tr>
+    <Tr>
+    	<Td>253</Td>
+    	<td>Prevents ad-hoc query plans to stay in cache.</td>
+    </Tr>
+    <tr>
+   	 	<tD>257</tD>
+   	 	<td>Will invoke a print algorithm on the XML output before returning it to make the XML result more readable.</td>
+    </tr>
+    <tr>
+    	<td>260</td>
+    	<td>Prints versioning information about extended stored procedure dynamic-link libraries (DLLs). For more information about __GetXpVersion(), see Creating Extended Stored Procedures. Scope: global or session</td>
+    </tr>
+    <tr>
+    	<td>262</td>
+    	<td>SQL 7 - Trailing spaces are no longer truncated from literal strings in CASE statements. Used after hotfix 891116</td>
+    </tr>
+    <tr>
+    	<td>302</td>
+    	<td>Should be used with flag 310 to show the actual join ordering. Prints information about whether the statistics page is used, the actual selectivity (if available), and what SQL Server estimated the physical and logical I/O would be for the indexes.</td>
+    </tr>
+    <tr>
+    	<td>310</td>
+    	<td>Prints information about join order. Index selection information is also available in a more readable format using SET SHOWPLAN_ALL, as described in the SET statement.</td>
+    </tr>
+    <tr>
+    	<td>320</td>
+    	<td>Disables join-order heuristics used in ANSI joins. To see join-order heuristics use flag 310. SQL Server uses join-order heuristics to reduce the no’ of permutations when using the best join order.</td>
+    </tr>
+    <tr>
+    	<td>323</td>
+    	<td>Reports on the use of update statements using UPDATE in place. Shows a detailed description of the various update methods used by SQL Server 6.5.</td>
+    </tr>
+    <tr>
+    	<Td>325</Td>
+    	<td>Prints information about the cost of using a non-clustered index or a sort to process an ORDER BY clause.</td>
+    </tr>
+    <tr>
+    	<td>326</td>
+    	<td>Prints information about the estimated & actual costs of sorts. Instructs the server to use arithmetic averaging when calculating density instead of a geometric weighted average when updating statistics. Useful for building better stats when an index has skew on the leading column. Use only for updating the stats of a table/index with known skewed data.</td>
+    </tr>
+    <tr>
+    	<td>330</td>
+    	<td>Enables full output when using the SET SHOWPLAN_ALL option, which gives detailed information about joins.</td>
+    </tr>
+    <tr>
+    	<td>342</td>
+    	<td>Disables the costing of pseudo-merge joins, thus significantly reducing time spent on the parse for certain types of large, multi-table joins. One can also use SET FORCEPLAN ON to disable the costing of pseudo-merge joins because the query is forced to use the order specified in the FROM clause.</td>
+    </tr>
+    <tr>
+    	<Td>345</Td>
+    	<td>Increase the accuracy of choice of optimum order when you join 6 or more tables.</td>
+    </tr>
+    <tr>
+    	<td>506</td>
+    	<td>Enforces SQL-92 standards regarding null values for comparisons between variables and parameters. Any comparison of variables and parameters that contain a NULL always results in a NULL.</td>
+    </tr>
+    <tr>
+    	<td>610</td>
+    	<td>SQL 10 – Enable the potential for minimal-logging when:
+· Bulk loading into an empty clustered index, with no nonclustered indexes
+· Bulk loading into a non-empty heap, with no nonclustered indexes</td>
+	</tr>
+	<tr>
+		<td>611</td>
+		<td>After SQL 9 when turned on, each lock escalation is recorded in the SQL Server error log along with the SQL Server handle number.</td>
+	</tr>
+	<tr>
+		<td>652</td>
+		<td>Disables read ahead for the server.</td>
+	</tr>
+	<tr>
+		<td>653</td>
+		<td>Disables read ahead for the current connection.</td>
+	</tr>
+	<tr>
+		<Td>661</Td>
+		<td>Disables the ghost record removal process. A ghost record is the result of a delete operation. When you delete a record, the deleted record is kept as a ghost record. Later, the deleted record is purged by the ghost record removal process. When you disable this process, the deleted record is not purged. Therefore, the space that the deleted record consumes is not freed. This behavior affects space consumption and the performance of scan operations. SCOPE: Global. If you turn off this trace flag, the ghost record removal process works correctly.</td>
+	</tr>
+	<tr>
+		<td>806</td>
+		<td>Cause 'DBCC-style' page auditing to be performed whenever a database page is read into the buffer pool. This is useful to catch cases where pages are being corrupted in memory and then written out to disk with a new page checksum. When they're read back in the checksum will look correct, but the page is corrupt (because of the previous memory corruption). This page auditing goes someway to catching this - especially on non-Enterprise Edition systems that don't have the 'checksum sniffer'.
+        </td>
+	</tr>
+	<tr>
+		<td>809</td>
+		<td>SQL 8 – Limits the amount of Lazy Write activity.</td>
+	</tr>
+	<tr>
+		<td>815</td>
+		<td>Enables latch enforcement. SQL Server 8 (with service pack 4) and SQL Server 9 can perform latch enforcement for data pages found in the buffer pool cache. Latch enforcement changes the virtual memory protection state while database page status changes from "clean" to "dirty" ("dirty" means modified through INSERT, UPDATE or DELETE operation). If an attempt is made to modify a data page while latch enforcement is set, it causes an exception and creates a mini-dump in SQL Server installation's LOG directory. Microsoft support can examine the contents of such mini-dump to determine the cause of the exception. In order to modify the data page the connection must first acquire a modification latch. Once the data modification latch is acquired the page protection is changed to read-write. Once the modification latch is released the page protection changes back to read-only.</td></tr></table>
+        <div id="content-footer">Posted 1st March 2016 by <a href="#">Sathish Chandra</a></div>
+  </div>
+<div id="page-gap"></div>

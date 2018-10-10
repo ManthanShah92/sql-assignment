@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="style.css">
+ <div id="content">
+  	<div id="heading">INSTALLATION</div>
+    <div id="topic-heading">INSTALLATION: </div>
+    <div id="spacing">
+<b>1. What are the minimum Software requirements to install SQL Server 2012?</b><br><Br>
+<ol type="a">
+	<li>Internet Explorer 7 or a later version is required for Microsoft Management Console (MMC), SQL Server Data Tools (SSDT), the Report Designer component of Reporting Services, and HTML Help</li>
+    <li>
+SQL Server 2012 does not install or enable Windows PowerShell 2.0; however Windows PowerShell 2.0 is an installation prerequisite for Database Engine components and SQL Server Management Studio.</li>
+<li>
+NET 3.5 SP1 is a requirement for SQL Server 2012 when you select Database Engine, Reporting Services, Replication, Master Data Services, Data Quality Services, or SQL Server Management Studio, and it is no longer installed by SQL Server Setup.</li>
+<li>
+Dot NET 4.0 is a requirement for SQL Server 2012. SQL Server installs .NET 4.0 during the feature installation step.  SQL Server Express does not install .NET 4.0 when installing on the Windows 2008 R2 SP1 Server core operating system. You must install .NET4.0 before you install SQL Server Express on a Windows 2008 R2 SP1 Server core operating system.</li>
+</ol>
+<br>
+
+<b>2. For SQL Server Setup installs what are the software components required?</b>
+<ul style="list-style-type:disc">
+	<li>Dot NET Framework 4 1</li>
+	<li>SQL Server Native Client</li>
+	<li>SQL Server Setup support files</li>
+</ul>
+
+<br>
+<b>3. Where will you find the SQL Server installation related logs?</b>
+
+<p>%programfiles%\Microsoft SQL Server\110\Setup Bootstrap\Log\<YYYYMMDD_HHMM>\</p>
+
+
+<b>4. Where we will get summery.txt file?</b>
+<br>
+<br>
+
+<b>5. How much minimum space required to install SQL?</b>
+<br>
+<br>
+
+<b>6 What is “ConfigurationFile.ini” file?</b>
+
+<p>SQL Server Setup generates a configuration file named ConfigurationFile.ini, based upon the system default and run-time inputs.   The ConfigurationFile.ini file is a text file which contains the set of parameters in name/value pairs along with descriptive comments. Many of the parameter names correspond to the screens and options which you see while installing SQL Server through the wizard.  We can then use the configuration file to install SQL Server with the same configuration instead of going through each of the installation screens.</p>
+
+
+<p>Installation configuration file are saving in this location:</p>
+
+<p>C:\Program Files\Microsoft SQL Server\100\Setup Bootstrap\Log\20120119_083229\ConfigurationFile.ini</p>
+
+
+<b>7. What is a service account?</b>
+
+<p>Based on the selected components while doing the installation we will find respective service to each component in the Windows Services. e.g. SQL Server, SQL Server Agent, SQL Analysis Services, SQL Server integration Services etc. There will be a user for each and every service through which each service will run. That use is called Service Account of that service.</p>
+
+<p>Mainly we categorize the Service account as below:</p>
+
+<p><b>Local User Account:</b> This user account is created in the server where SQL Server is installed; this account does not have access to network resources.</p>
+
+<p><b>Local Service Account:</b> This is a builtin windows account that is available for configuring services in windows. This account has permissions as same as accounts that are in the users group, thus it has limited access to the resources in the server.</p>
+
+<p><b>Local System Account:</b> This is a builtin windows account that is available for configuring services in windows. This is a highly privileged account that has access to all resources in the server with administrator rights.</p>
+
+<p><b>Network Service Account:</b> This is a builtin windows account that is available for configuring services in windows. This has permissions to access resources in the network under the computer account.</p>
+
+<p><b>Domain Account:</b> This account is a part of our domain that has access to network resources for which it is intended to have permission. It is always advised to run SQL Server and related services under a domain account with minimum privilege need to run SQL Server and its related services.</p>
+
+<b>8. Do we need to grant Administrator permissions on the Windows server to SQL Service account to run the services or not, why?</b>
+
+<p>No, it is not required. It’s not mandatory to grant Administrator permissions to the service account.</p>
+
+<b>9. What permissions are required to install SQL Server on a server?</b>
+
+<p>User through which we are installing SQL Server must have administrator permissions on the Windows server.</p>
+
+<b>10. What are Shared Features Directory and its usages?</b>
+
+<p>This directory contains the common files used by all instances on a single computer e.g. SSMS, sqlcmd, bcp, DTExec etc. These are installed in the folder <drive>:\Program Files\Microsoft SQL Server\110\ , where <drive> is the drive letter where components are installed. The default is usually drive C.</p>
+    </div>   
+<div id="content-footer">Posted 2nd March 2016 by <a href="#">Sathish Chandra</a></div>
+  </div>
+<div id="page-gap"></div>
+
